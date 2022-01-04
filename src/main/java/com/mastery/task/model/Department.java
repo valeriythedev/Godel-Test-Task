@@ -22,19 +22,19 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "genders")
+@Table(name = "departments")
 @Entity
-public class Gender {
+public class Department {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "gender")
+    @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "genders", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "departments", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonIgnore
-    private List<Employee> employeeList;
+    private List<Employee> employees;
 }
