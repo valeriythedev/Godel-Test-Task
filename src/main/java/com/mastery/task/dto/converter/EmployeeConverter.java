@@ -1,6 +1,8 @@
 package com.mastery.task.dto.converter;
 
 import com.mastery.task.dto.EmployeeDTO;
+import com.mastery.task.exception.InvalidEmployeeDataException;
+import com.mastery.task.exception.NoSuchRecordException;
 import com.mastery.task.model.Employee;
 import com.mastery.task.repository.DepartmentDAO;
 import com.mastery.task.repository.EmployeeDAO;
@@ -36,10 +38,46 @@ public class EmployeeConverter {
 
     public Employee toEmployee(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
-        employee.setFirstName(employeeDTO.getFirstName());
-        employee.setLastName(employeeDTO.getLastName());
-        employee.setJobTitle(employeeDTO.getJobTitle());
-        employee.setDateOfBirth(employeeDTO.getDateOfBirth());
+        if(!(employeeDTO.getFirstName().equals(""))) {
+            employee.setFirstName(employeeDTO.getFirstName());
+        } else {
+            throw new InvalidEmployeeDataException("Employee firstName cannot be null.");
+        }
+        if(!(employeeDTO.getLastName().equals(""))) {
+            employee.setLastName(employeeDTO.getLastName());
+        } else {
+            throw new InvalidEmployeeDataException("Employee lastName cannot be null.");
+        }
+        if(!(employeeDTO.getJobTitle().equals(""))) {
+            employee.setJobTitle(employeeDTO.getJobTitle());
+        } else {
+            throw new InvalidEmployeeDataException("Employee jobTitle cannot be null.");
+        }
+        if(!(employeeDTO.getDateOfBirth() == null)) {
+            employee.setDateOfBirth(employeeDTO.getDateOfBirth());
+        } else {
+            throw new InvalidEmployeeDataException("Employee dateOfBirth cannot be null.");
+        }
         return employee;
+    }
+
+    public Employee updateEmployee(Employee employee, Integer id) {
+        Employee updatedEmployee = employeeDAO.findById(id)
+                .orElseThrow(() -> new NoSuchRecordException
+                        (String.format("Employee with id=%s not found", id))
+                );
+        if(!(employee.getFirstName() == null)) {
+            updatedEmployee.setFirstName(employee.getFirstName());
+        }
+        if(!(employee.getLastName() == null)) {
+            updatedEmployee.setLastName(employee.getLastName());
+        }
+        if(!(employee.getJobTitle() == null)) {
+            updatedEmployee.setJobTitle(employee.getJobTitle());
+        }
+        if(!(employee.getDateOfBirth() == null)) {
+            updatedEmployee.setDateOfBirth(employee.getDateOfBirth());
+        }
+        return updatedEmployee;
     }
 }
