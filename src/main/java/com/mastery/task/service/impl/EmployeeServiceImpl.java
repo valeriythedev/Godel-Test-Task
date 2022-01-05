@@ -39,9 +39,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee create(EmployeeDTO employeeDTO) {
-        if (employeeDTO == null) {
-            throw new NullPointerException("Employee can't be null");
-        }
         Employee employee = converter.toEmployee(employeeDTO);
 
         Department department = departmentDAO.findById(employeeDTO.getDepartmentId())
@@ -66,23 +63,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee update(Employee employee, Integer id) {
-        Employee updatedEmployee = employeeDAO.findById(id)
-                .orElseThrow(() -> new NoSuchRecordException(String.format("Employee with id=%s not found", id))
-                );
-        if(!(employee.getFirstName() == null)) {
-            updatedEmployee.setFirstName(employee.getFirstName());
-        }
-        if(!(employee.getLastName() == null)) {
-            updatedEmployee.setLastName(employee.getLastName());
-        }
-        if(!(employee.getJobTitle() == null)) {
-            updatedEmployee.setJobTitle(employee.getJobTitle());
-        }
-        if(!(employee.getDateOfBirth() == null)) {
-            updatedEmployee.setDateOfBirth(employee.getDateOfBirth());
-        }
         log.info("IN EmployeeServiceImpl update() employee with id {}, {}", employee, id);
-        return employeeDAO.save(updatedEmployee);
+        return employeeDAO.save(converter.updateEmployee(employee, id));
     }
 
     @Override
