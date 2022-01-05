@@ -62,9 +62,7 @@ public class Employee {
         return "Employee{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", departments=" + departments +
                 ", jobTitle='" + jobTitle + '\'' +
-                ", genders=" + genders +
                 ", dateOfBirth=" + dateOfBirth +
                 '}';
     }
