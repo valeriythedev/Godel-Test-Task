@@ -77,6 +77,7 @@ public class EmployeeControllerTest {
                 .andExpect(jsonPath("$.jobTitle").value("Junior Java Developer"))
                 .andExpect(jsonPath("$.dateOfBirth").value("2003-02-11"))
                 .andExpect(jsonPath("$.genderId").value(1));
+        log.info("Execute test EmployeeControllerTest shouldCreateEmployee()");
     }
 
     @Test
@@ -92,6 +93,7 @@ public class EmployeeControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.jobTitle").value("Middle Java Developer"));
+        log.info("Execute test EmployeeControllerTest shouldUpdateEmployee()");
     }
 
     @Test
@@ -108,6 +110,7 @@ public class EmployeeControllerTest {
                 .andExpect(jsonPath("$.jobTitle").value("Junior Java Developer"))
                 .andExpect(jsonPath("$.dateOfBirth").value("2003-04-16"))
                 .andExpect(jsonPath("$.genderId").value(1));
+        log.info("Execute test EmployeeControllerTest shouldGetByIdEmployee()");
     }
 
     @Test
@@ -121,6 +124,7 @@ public class EmployeeControllerTest {
                 .andExpect(jsonPath("$.size()").value(2))
                 .andExpect(jsonPath("$[0].firstName").value("Polina"))
                 .andExpect(jsonPath("$[1].jobTitle").value("Junior Java Developer"));
+        log.info("Execute test EmployeeControllerTest shouldGetAllEmployees()");
     }
 
     @Test
@@ -131,12 +135,14 @@ public class EmployeeControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value(10));
+        log.info("Execute test EmployeeControllerTest shouldDeleteEmployeeById()");
     }
 
     @Test
     public void shouldExistsGlobalControllerAdvice() {
         GlobalControllerAdvice advice = this.webApplicationContext.getBean(GlobalControllerAdvice.class);
         assertNotNull(advice);
+        log.info("Execute test EmployeeControllerTest shouldExistsGlobalControllerAdvice()");
     }
 
     @Test
@@ -147,6 +153,7 @@ public class EmployeeControllerTest {
                 .andDo(print())
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.httpStatus").value("NOT_FOUND"));
+        log.info("Execute test EmployeeControllerTest shouldReturnNotFoundIfRecordNotFound");
     }
 
     @Test
@@ -167,6 +174,7 @@ public class EmployeeControllerTest {
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.httpStatus").value("BAD_REQUEST"));
+        log.info("Execute test EmployeeControllerTest shouldReturnBadRequestIfDepartmentIdIncorrect()");
     }
 
     @Test
@@ -187,6 +195,7 @@ public class EmployeeControllerTest {
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.httpStatus").value("BAD_REQUEST"));
+        log.info("Execute test EmployeeControllerTest shouldReturnBadRequestIfGenderIdIncorrect()");
     }
 
     @Test
@@ -207,5 +216,6 @@ public class EmployeeControllerTest {
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.httpStatus").value("BAD_REQUEST"));
+        log.info("Execute test EmployeeControllerTest shouldReturnBadRequestIfEmployeeDataIncorrect()");
     }
 }
