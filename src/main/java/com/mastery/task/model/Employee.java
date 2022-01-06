@@ -63,6 +63,14 @@ public class Employee {
     @Schema(description = "2003-02-11")
     private Date dateOfBirth;
 
+    public Employee(Integer id, String firstName, String lastName, String jobTitle, Date dateOfBirth) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.jobTitle = jobTitle;
+        this.dateOfBirth = dateOfBirth;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
