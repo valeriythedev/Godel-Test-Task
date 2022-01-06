@@ -2,6 +2,7 @@ package com.mastery.task.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "employees")
 @Entity
+@Schema(description = "Entity of employee")
 public class Employee {
 
     @Id
@@ -31,9 +33,11 @@ public class Employee {
     private Integer id;
 
     @Column(name = "first_name")
+    @Schema(description = "Alex", example = "Denis")
     private String firstName;
 
     @Column(name = "last_name")
+    @Schema(description = "Johnson")
     private String lastName;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -44,6 +48,7 @@ public class Employee {
     private List<Department> departments;
 
     @Column(name = "job_title")
+    @Schema(description = "Junior Java Developer")
     private String jobTitle;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -55,7 +60,16 @@ public class Employee {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_of_birth")
+    @Schema(description = "2003-02-11")
     private Date dateOfBirth;
+
+    public Employee(Integer id, String firstName, String lastName, String jobTitle, Date dateOfBirth) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.jobTitle = jobTitle;
+        this.dateOfBirth = dateOfBirth;
+    }
 
     @Override
     public String toString() {

@@ -19,6 +19,8 @@
         <postgres.properties>42.3.1</postgres.properties>
         <junit.jupiter.api.properties>5.8.2</junit.jupiter.api.properties>
         <junit.properties>4.13.2</junit.properties>
+        <swagger.properties>2.1.12</swagger.properties>
+        <springdoc.properties>1.6.3</springdoc.properties>
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
     </properties>
@@ -63,6 +65,16 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgres.properties}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger.properties}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc.properties}</version>
         </dependency>
     </dependencies>
 
